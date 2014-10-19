@@ -10,7 +10,7 @@ class Customer(models.Model):
     email = models.EmailField()
     phone = models.CharField(max_length = 20)
     password = models.CharField(max_length = 20)
-    status = models.CharField(max_length = 20)
+    status = models.IntegerField(default = 0)
 
     @staticmethod
     def contain_email(e):
