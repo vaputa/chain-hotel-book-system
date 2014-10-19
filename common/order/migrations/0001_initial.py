@@ -7,6 +7,7 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
+        ('room', '0001_initial'),
         ('customer', '0001_initial'),
     ]
 
@@ -19,6 +20,7 @@ class Migration(migrations.Migration):
                 ('price', models.IntegerField()),
                 ('status', models.IntegerField()),
                 ('customer', models.ForeignKey(to='customer.Customer')),
+                ('room', models.ForeignKey(to='room.Room')),
             ],
             options={
             },

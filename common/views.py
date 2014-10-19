@@ -1,5 +1,8 @@
 from django.shortcuts import render
 
-# Create your views here.
+from common.models import SearchForm
+
 def homepage(request):
-    return render(request, 'homepage.html', {})
+    form = SearchForm()
+    return render(request, 'homepage.html', {'form' : form})
+

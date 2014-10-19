@@ -3,5 +3,29 @@
 <body>
     <a href='/hotel/list/'> 显示所有Hotel </a> <br />
     <a href='/hotel/add/'> 添加Hotel </a>
+    <form action='/room/search/' method='POST'>
+        {% csrf_token %}    
+    <table>
+    {{ form }}
+    <tr>
+        <td>
+            <input type='submit' value='search'/>
+        </td>
+    </tr>
+    </table>
+    </form>
+    {{rooms}}
+    <table>
+
+        {% for room in rooms %}
+        <tr>
+            <td>{{ room.isFree }}</td>            
+            <td>{{ room.room_id }}</td>
+            <td>{{ room.hotel }}</td>
+            <td>{{ room.room_type }}</td>
+            <td><a href="{% url 'common.order.views.new_order' room.room_id begin end%}"> 预定 </a></td>
+        </tr>
+        {% endfor %}
+    </table>
 </body>
 </html>

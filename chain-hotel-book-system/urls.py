@@ -3,8 +3,8 @@ from django.contrib import admin
 
 from common.hotel.views import hotel_add, hotel_edit, hotel_list, hotel_room_list
 from common.customer.views import customer_register, login
-from common.room.views import room_add, room_edit
-
+from common.room.views import room_add, room_edit, room_search
+from common.order.views import new_order
 urlpatterns = [
     url('^$', 'common.views.homepage'),
     url('^login/$', login),
@@ -14,6 +14,8 @@ urlpatterns = [
     url('^hotel/(?P<id>\d{0,4})/room/$', hotel_room_list),
     url('^room/add/$', room_add),
     url('^room/(?P<id>\d{0,4})/edit/$', room_edit),
+    url('^room/search/$', room_search),
+    url('^order/new_order/(?P<id>\d{0,4})/(?P<begin>(\d|-){0,12})/(?P<end>(\d|-){0,12})/$', new_order),
     url('^customer/register/$', customer_register),
 #    url(r'^admin/', include(admin.site.urls)),
 ]
