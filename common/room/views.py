@@ -20,6 +20,10 @@ def room_add(request):
         form = RoomForm()
     return render(request, 'room.html', {'action' : '/room/add/', 'form' : form})
 
+def room_list(request):
+    rooms = Room.objects.all()
+    return render(request, 'rooms.html', {'rooms' : rooms})
+
 def room_edit(request, id):
     if request.method == 'POST':
         room = Room.objects.get(room_id = id)

@@ -21,6 +21,7 @@ def customer_register(request):
     return render(request, 'register.html', {'form' : form})
 
 def login(request):
+    print "current user: " + str(request.session.get('user', None))
     if request.method == "POST":
         form = LoginForm(request.POST)
         if form.is_valid():
@@ -31,6 +32,11 @@ def login(request):
             elif not Customer.is_auth(email, password):
                 return render(request, 'login.html', {'form' : form , 'wrong_password' : True})
             else:
+                request.session['user'] = email
                 print "login successfully"
     form = LoginForm()
     return render(request, 'login.html', {'form' : form})
+
+def logout(request):
+    del request.session['user']
+    return HttpResponseRedirect("/")

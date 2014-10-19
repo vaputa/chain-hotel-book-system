@@ -1,8 +1,13 @@
 <html>
-
 <body>
+    <a href='/hotel/add/'> 添加Hotel </a> <br />
     <a href='/hotel/list/'> 显示所有Hotel </a> <br />
-    <a href='/hotel/add/'> 添加Hotel </a>
+    <a href='/room/add/'> 添加Room </a> <br />
+    <a href='/room/list/'> 所有Room </a> <br />
+    <a href='/customer/register/'> 注册</a> <br />
+    <a href='/login/'>登录</a> <br />
+    <a href='/logout/'>登出</a> <br />
+    {{ request.session.user}}
     <form action='/room/search/' method='POST'>
         {% csrf_token %}    
     <table>

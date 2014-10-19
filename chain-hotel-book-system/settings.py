@@ -30,13 +30,16 @@ TEMPLATE_DIRS = [
     './templates'
 ]
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    "django.core.context_processors.request",
+)
 # Application definition
 
 INSTALLED_APPS = (
 #    'django.contrib.admin',
 #    'django.contrib.auth',
 #    'django.contrib.contenttypes',
-#    'django.contrib.sessions',
+    'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'common',

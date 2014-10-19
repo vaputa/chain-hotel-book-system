@@ -2,8 +2,10 @@
     {% for e in rooms %}
     <tr>
         <td>{{e.hotel_id}}</td>
+        <td>{{e.hotel}}</td>
         <td>{{e.room_number}}</td>
         <td>{{e.room_type}}</td>
-    <tr>
+            <td><a href="{% url 'common.room.views.room_edit' e.room_id %}"> 修改 </a></td>
+        <tr>
     {% endfor %}
 </table>
