@@ -14,15 +14,15 @@ from common.room.models import Room
 from models import Order
 
 def new_order(request, id, begin, end):
-#    print datetime.date(time.strptime(begin, "%Y-%m-%d"))
-    customer = Customer.objects.get(customer_id = 1)
-    room = Room.objects.get(room_id = 1)
+
+    customer = Customer.objects.get(customer_id = 1) #TODO
+    room = Room.objects.get(room_id = id)
     order = Order(room = room, customer = customer, price = 0)
     order.save()
     s = datetime.date(*(time.strptime(begin, '%Y-%m-%d')[0:3]))
     t = datetime.date(*(time.strptime(end, '%Y-%m-%d')[0:3]))
     while s != t:
-        od = OrderDetail(order = order, order_date = s)
+        od = OrderDetail(room = room, order = order, order_date = s)
         od.save()
         s = s + datetime.timedelta(1)
     return render(request, 'room.html', {})

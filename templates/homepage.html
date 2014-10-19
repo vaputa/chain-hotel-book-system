@@ -14,12 +14,11 @@
     </tr>
     </table>
     </form>
-    {{rooms}}
     <table>
 
         {% for room in rooms %}
         <tr>
-            <td>{{ room.isFree }}</td>            
+            <td>{{ room.is_free }}</td>            
             <td>{{ room.room_id }}</td>
             <td>{{ room.hotel }}</td>
             <td>{{ room.room_type }}</td>

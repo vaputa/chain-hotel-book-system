@@ -38,10 +38,19 @@ def room_search(request):
         if form.is_valid():
             s = form.cleaned_data['order_begin']
             t = form.cleaned_data['order_end']
-            rooms = Room.objects.extra(select = {'isFree' : 
+            rooms = Room.objects.extra(select = {'is_free' : 
                 "SELECT COUNT(*) FROM orderdetail_orderdetail \
-                 WHERE room_id = room_room.room_id AND '" + 
-                 str(s) + "' <= order_date AND order_date <= '" + str(t) + "'"})
+                WHERE room_id = room_room.room_id AND '" + 
+                str(s) + "' <= order_date AND order_date < '" + str(t) + "'"})
+
+            buf = {}
+            def f(x): 
+                r = str(x.hotel_id) + ' ' + str(x.room_type)
+                if x.is_free != 0 or r in buf:
+                    return False     
+                buf[r] = True
+                return True
+            rooms = filter(f, rooms)
             ctx = {'form': form, 'rooms' : rooms}
             ctx['begin'] = s
             ctx['end'] = t
