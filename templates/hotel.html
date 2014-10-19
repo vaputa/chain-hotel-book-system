@@ -1,0 +1,12 @@
+<html>
+<body>
+<form action="{{ action }}" method="POST">
+{% csrf_token %}	
+<table>
+    {{ form.hotel_id }}
+	{{ form }}
+	<tr> <td> <input type="submit" value="提交"/></td>  </tr>
+</table>	
+</form>
+</body>
+</html>

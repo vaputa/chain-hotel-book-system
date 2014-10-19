@@ -1,0 +1,14 @@
+<form action="/login/" method="POST">
+{% csrf_token %}    
+<h5>
+{%if non_exist_email %}
+    EMAIL不存在
+{%elif wrong_password %}
+    密码不正确
+{% endif %}
+</h5>
+<table>
+    {{ form }}
+    <tr> <td> <input type="submit" value="提交"/></td>  </tr>
+</table>    
+</form>

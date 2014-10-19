@@ -1,0 +1,20 @@
+<table>
+    <tr>
+        <td>ID</td>
+        <td>名称</td>
+        <td>地址</td>
+        <td>电话</td>
+        <td>坐标</td>
+        <td>操作</td>
+    </tr>
+    {% for e in hotels %}
+    <tr>
+        <td>{{e.hotel_id}}</td>
+        <td>{{e.name}}</td>
+        <td>{{e.address}}</td>
+        <td>{{e.tel}}</td>
+        <td>{{e.location}}</td>
+        <td><a href='{% url 'common.hotel.views.hotel_edit' e.hotel_id %}'>Edit</a> <a href='{% url 'common.hotel.views.hotel_room_list' e.hotel_id %}'>Rooms</a></td>
+    <tr>
+    {% endfor %}
+</table>
