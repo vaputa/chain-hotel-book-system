@@ -1,0 +1,8 @@
+
+<form action="/customer/edit/" method="POST">
+{% csrf_token %}    
+<table>
+    {{ form }}
+    <tr> <td> <input type="submit" value="update"/></td>  </tr>
+</table>    
+</form>

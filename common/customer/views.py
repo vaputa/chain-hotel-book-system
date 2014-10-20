@@ -32,6 +32,8 @@ def login(request):
             elif not Customer.is_auth(email, password):
                 return render(request, 'login.html', {'form' : form , 'wrong_password' : True})
             else:
+                customer = Customer.objects.get(email = email)
+                request.session['uid'] = customer.customer_id
                 request.session['user'] = email
                 print "login successfully"
     form = LoginForm()
@@ -39,4 +41,18 @@ def login(request):
 
 def logout(request):
     del request.session['user']
+    del request.session['uid']
     return HttpResponseRedirect("/")
+
+def customer_edit(request):
+    if request.session.get('user', None) == None:
+        return HttpResponseRedirect('/')
+    customer = Customer.objects.get(email = request.session['user'])
+    if request.method == "POST":
+        form = CustomerRegisterForm(request.POST, instance = customer)
+        if form.is_valid():
+            customer = form.save()
+            customer.save()
+    else:
+        form = CustomerRegisterForm(instance = customer)
+    return render(request, 'customer_edit.html', {'form' : form})
