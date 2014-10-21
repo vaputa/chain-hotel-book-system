@@ -7,6 +7,9 @@
         <td>
             {{order.room.hotel}}
         </td>
+        <td>
+            <a href='{% url 'common.order.views.cancel' order.order_id %}' > cancel </a>
+        </td>        
     </tr>
 {% endfor %}
 </table>

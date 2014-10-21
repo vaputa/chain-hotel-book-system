@@ -27,7 +27,7 @@
             <td>{{ room.room_id }}</td>
             <td>{{ room.hotel }}</td>
             <td>{{ room.room_type }}</td>
-            <td><a href="{% url 'common.order.views.new_order' room.room_id begin end%}"> 预定 </a></td>
+            <td><a href="{% url 'common.order.views.new' room.room_id begin end%}"> 预定 </a></td>
         </tr>
         {% endfor %}
     </table>

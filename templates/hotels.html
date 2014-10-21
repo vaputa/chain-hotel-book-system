@@ -14,7 +14,7 @@
         <td>{{e.address}}</td>
         <td>{{e.tel}}</td>
         <td>{{e.location}}</td>
-        <td><a href='{% url 'common.hotel.views.hotel_edit' e.hotel_id %}'>Edit</a> <a href='{% url 'common.hotel.views.hotel_room_list' e.hotel_id %}'>Rooms</a></td>
+        <td><a href='{% url 'common.hotel.views.edit' e.hotel_id %}'>Edit</a> <a href='{% url 'common.hotel.views.room_list' e.hotel_id %}'>Rooms</a></td>
     <tr>
     {% endfor %}
 </table>

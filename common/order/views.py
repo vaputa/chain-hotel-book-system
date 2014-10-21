@@ -13,7 +13,7 @@ from common.customer.models import Customer
 from common.room.models import Room
 from models import Order
 
-def new_order(request, id, begin, end):
+def new(request, id, begin, end):
     customer = Customer.objects.get(customer_id = 1) #TODO
     room = Room.objects.get(room_id = id)
     s = datetime.date(*(time.strptime(begin, '%Y-%m-%d')[0:3]))
@@ -27,10 +27,17 @@ def new_order(request, id, begin, end):
         s = s + datetime.timedelta(1)
     return render(request, 'room.html', {})
 
-def order_list(request):
+def list(request):
     if request.session.get('uid', None) == None:
         return HttpResponseRedirect('/')
     uid = request.session['uid']
-    orders = Order.objects.filter(customer_id = uid)
-    print orders
+    orders = Order.objects.filter(customer_id = uid, status = 1)
     return render(request, 'order_list_customer.html', {'orders': orders})
+
+def cancel(request, id):
+    order = Order.objects.get(order_id = id) 
+    orderdetails = OrderDetail.objects.filter(order_id = id)
+    orderdetails.update(status = 1)
+    order.status = 1
+    order.save()
+    return HttpResponseRedirect('/order/list')

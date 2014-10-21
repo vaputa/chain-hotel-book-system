@@ -10,7 +10,7 @@ from common.models import SearchForm
 from common.hotel.models import HotelEntity, HotelEntityForm
 
 
-def room_add(request):
+def add(request):
     if request.method == "POST":
         form = RoomForm(request.POST)
         if form.is_valid():
@@ -20,11 +20,11 @@ def room_add(request):
         form = RoomForm()
     return render(request, 'room.html', {'action' : '/room/add/', 'form' : form})
 
-def room_list(request):
+def list(request):
     rooms = Room.objects.all()
     return render(request, 'rooms.html', {'rooms' : rooms})
 
-def room_edit(request, id):
+def edit(request, id):
     if request.method == 'POST':
         room = Room.objects.get(room_id = id)
         form = RoomForm(request.POST, instance = room)
@@ -36,7 +36,7 @@ def room_edit(request, id):
     form = RoomForm(instance = room)
     return render(request, 'room.html', {'action' : '/room/' + id + '/edit/','form' : form})
 
-def room_search(request):
+def search(request):
     if request.method == 'POST':
         form = SearchForm(request.POST)
         if form.is_valid():
@@ -44,7 +44,7 @@ def room_search(request):
             t = form.cleaned_data['order_end']
             rooms = Room.objects.extra(select = {'is_free' : 
                 "SELECT COUNT(*) FROM orderdetail_orderdetail \
-                WHERE room_id = room_room.room_id AND '" + 
+                WHERE status = 0 and room_id = room_room.room_id AND '" + 
                 str(s) + "' <= order_date AND order_date < '" + str(t) + "'"})
 
             buf = {}

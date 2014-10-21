@@ -11,7 +11,7 @@ from django.template.loader import get_template
 from models import HotelEntity, HotelEntityForm
 from common.room.models import Room
 
-def hotel_add(request):
+def add(request):
     if request.method == 'POST':
         form = HotelEntityForm(request.POST)
         if form.is_valid():
@@ -21,7 +21,7 @@ def hotel_add(request):
         form = HotelEntityForm()
     return render(request, 'hotel.html', {'action': '/hotel/add/', 'form' : form})   
 
-def hotel_edit(request, id):
+def edit(request, id):
     if request.method == 'POST':
         hotel_entity = HotelEntity.objects.get(hotel_id = id)
         form = HotelEntityForm(request.POST, instance = hotel_entity)
@@ -34,10 +34,10 @@ def hotel_edit(request, id):
     form = HotelEntityForm(instance = hotel_entity)
     return render(request, 'hotel.html', {'action': '/hotel/' + id +'/edit/','form' : form})
 
-def hotel_list(request):
+def list(request):
     hotels = HotelEntity.objects.all()
     return render(request, 'hotels.html', {'hotels' : hotels})
 
-def hotel_room_list(request, id):
+def room_list(request, id):
     rooms = Room.objects.filter(hotel_id = id)
     return render(request, 'rooms.html', {'rooms' : rooms})
