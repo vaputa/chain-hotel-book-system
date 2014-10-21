@@ -7,4 +7,4 @@ class OrderDetail(models.Model):
     order = models.ForeignKey(Order)
     room = models.ForeignKey(Room)  
     order_date = models.DateField()
-    
+    status = models.IntegerField(default = 0)
