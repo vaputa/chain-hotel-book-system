@@ -1,5 +1,136 @@
 <html>
-<body>
+{% include "head.html" %}
+
+<body class="home-template custom-bg" style="background-image: url(/static/assets/pic/hotel6.jpg)">
+
+    <nav class="navbar navbar-ghost" role="navigation">
+        <div class="container-fluid">
+    
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#global-navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#"><img width="50" src="/static/assets/ico/4f5566c1f7bc28b3f7ac1fada8abe.png" alt="logo"></a>
+            </div>
+    
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="global-navbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="/">首页</a></li>
+                    <li><a href="#">显示房间</a></li>
+                    <li><a href="#">添加房间</a></li>
+                    <li><a href="{% url 'common.customer.views.customer_register' %}">注册</a></li>
+                    <li><a href="{% url 'common.customer.views.login' %}">登录</a></li>
+                    <li><a href="#">关于</a></li>
+                </ul>
+                <p class="navbar-text qq"> {{request.session.user}}</p>
+            </div>
+    
+    
+    
+        </div>
+    </nav>
+
+    
+<header id="logo" class="container">
+    <div class="row">
+        <div class="col-lg-8 col-lg-push-2">
+            <h1 class="blog-title">
+                <a href="#">God Hao Hotel</a>
+            </h1>
+            <h2 class="blog-desc">
+                <a href="#">The God Hao Hotel  allows you to share your story with the world.</a>
+            </h2>
+            <div class="social">
+                <a href="http://weibo.com/u/2315359802" class="btn btn-outline btn-lg" title="官方微博" target="_blank"><i class="fa fa-weibo"></i> 官方微博</a>
+                <a class="btn btn-outline btn-lg" href="#" title="联系我们" target="_blank"><i class="fa fa-comments"></i> 联系我们</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main class="container" role="main">
+    <div class="row">
+        <div class="col-sm-8 col-sm-push-1">
+
+            <article class="panel post tag-ghost-post tag-xin-ban-ben-fa-bu" data-scroll-reveal="enter bottom"> 
+                <header class="panel-heading post-header">
+                    <h2 class="post-title">
+                        <a href="#">页面内容放置处</a>
+                    </h2>
+                    <form action='/room/search/' method='POST'>
+                        {% csrf_token %}    
+                        <table class='table'>
+                        {{ form }}
+                        <tr>
+                            <td>
+                            </td>
+                            <td colspan='1' offset='1'>
+                                <input type='submit' class='btn btn-primary' value='search'/>
+                            </td>
+                        </tr>
+                        </table>
+                    </form>
+                    <table class="table">
+                        {% for room in rooms %}
+                        <tr>
+                            <td>{{ room.is_free }}</td>            
+                            <td>{{ room.room_id }}</td>
+                            <td>{{ room.hotel }}</td>
+                            <td>{{ room.room_type }}</td>
+                            <td><a href="{% url 'common.order.views.new' room.room_id begin end%}"> 预定 </a></td>
+                        </tr>
+                        {% endfor %}
+                    </table> 
+                </header>
+                
+                <section class="panel-footer post-meta">
+                    <div class="post-tags">
+                            <i class="fa fa-tags"></i>
+                            <a href="#">Ghost</a>
+                            <p>写点文字内容或者放置表单</p>
+                    </div>                   
+                </section>
+            </article>
+
+            <article class="panel post tag-ghost-post tag-xin-ban-ben-fa-bu" data-scroll-reveal="enter bottom"> 
+                <header class="panel-heading post-header">
+                    <h2 class="post-title">
+                        <a href="#">Form2表单2放置处</a>
+                    </h2>
+                </header>
+                
+                <section class="panel-footer post-meta">
+                    <div class="post-tags">
+                            <i class="fa fa-tags"></i>
+                            <a href="#">Hao</a>
+                    </div>
+                </section>
+            </article>
+
+        </div>
+        <div class="col-sm-2 col-sm-push-1">
+            <div class="list-group tag-sidebar">
+                <a href="#" class="list-group-item"><i class="fa fa-tag"></i> 可选菜单1</a>
+                <a href="#" class="list-group-item"><i class="fa fa-tag"></i> 可选菜单2</a>
+                <a href="#" class="list-group-item"><i class="fa fa-tag"></i> 可选3</a>
+                <a href="#" class="list-group-item"><i class="fa fa-tag"></i> 可选4</a>
+                <a href="#" class="list-group-item"><i class="fa fa-tag"></i> 可选5</a>
+
+            </div>
+            <div class="list-group ad-sidebar">
+                <a href="#" target="_blank" class="list-group-item text-hide">测试菜单1</a>
+            </div>        
+        </div>
+    </div>
+
+
+</main>
+
     <a href='/hotel/add/'> 添加Hotel </a> <br />
     <a href='/hotel/list/'> 显示所有Hotel </a> <br />
     <a href='/room/add/'> 添加Room </a> <br />
@@ -7,29 +138,9 @@
     <a href='/customer/register/'> 注册</a> <br />
     <a href='/login/'>登录</a> <br />
     <a href='/logout/'>登出</a> <br />
-    {{ request.session.user}}
-    <form action='/room/search/' method='POST'>
-        {% csrf_token %}    
-    <table>
-    {{ form }}
-    <tr>
-        <td>
-            <input type='submit' value='search'/>
-        </td>
-    </tr>
-    </table>
-    </form>
-    <table>
+   
+    
+    {% include "footer.html" %}
 
-        {% for room in rooms %}
-        <tr>
-            <td>{{ room.is_free }}</td>            
-            <td>{{ room.room_id }}</td>
-            <td>{{ room.hotel }}</td>
-            <td>{{ room.room_type }}</td>
-            <td><a href="{% url 'common.order.views.new' room.room_id begin end%}"> 预定 </a></td>
-        </tr>
-        {% endfor %}
-    </table>
 </body>
 </html>
