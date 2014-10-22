@@ -4,6 +4,10 @@ import smtplib
 from email.header import Header
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+import datetime
+import time
+import hashlib
+import random
 import sys 
 reload(sys) 
 sys.setdefaultencoding('utf-8')
@@ -33,19 +37,15 @@ def send_mail(to_list,sub,content):
 		print str(e)
 		return False
 
-if __name__=='__main__':
-	mailcontent='''
-		<!DOCTYPE HTML>
-		<html>
-		<head>
-		<meta charset="utf-8">
-		<title>酒店注册验证</title>
-		</head>
-		<body>
-			<h1>昊神太强了</h1>
-		</body>
-		</html>
+def generateToken():
+	#以下为md5的url生成部分，通过当前时间戳和一个随机数确定一个字符串，对其进行md5处理
+	d=time.time()
+	t=random.random()
+	unistr=str(d+t)
+	mymd5=hashlib.md5()
+	mymd5.update(unistr)
+	link=mymd5.hexdigest()
+	return link
 
-	'''
-	mysub="昊神灯全亮"
-	send_mail("11300240039@fudan.edu.cn;11300240033@fudan.edu.cn",mysub,mailcontent)
+
+
