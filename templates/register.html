@@ -61,7 +61,7 @@
                 <header class="panel-heading post-header">
                     <table class='table table-striped'>
                         {% if info %}
-                        <tr><td colspan=2>{{ info }}</td></tr>
+                        <tr><td colspan=2 class='text-danger'>{{ info }}</td></tr>
                         {% endif %}
                         
                         <form action="{% url 'common.customer.views.register' %}" method="POST">

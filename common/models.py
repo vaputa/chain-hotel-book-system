@@ -4,8 +4,8 @@ from django import forms
 import datetime
 
 class LoginForm(forms.Form):
-    email = forms.EmailField()
-    password = forms.CharField(max_length = 20)
+    email = forms.EmailField(widget=forms.TextInput(attrs={'class': 'form-control', 'type': 'text'}), label='EMAIL')
+    password = forms.CharField(max_length = 20, widget=forms.TextInput(attrs={'class': 'form-control', 'type': 'password'}), label = '密码')
 
 class SearchForm(forms.Form):
     capacity = forms.IntegerField(initial = 2, widget=forms.NumberInput(attrs={'class': 'form-control', 'min' : 1, 'max' : 5}), label='人数')

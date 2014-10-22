@@ -33,23 +33,23 @@ def register(request):
     return render(request, 'register.html', {'form' : form, 'info' : info})
 
 def login(request):
-    print "current user: " + str(request.session.get('user', None))
+    info = ''
     if request.method == "POST":
         form = LoginForm(request.POST)
         if form.is_valid():
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
             if not Customer.contain_email(email):
-                return render(request, 'login.html', {'form' : form , 'non_exist_email' : True})
+                info = 'EMAIL不存在！'
             elif not Customer.is_auth(email, password):
-                return render(request, 'login.html', {'form' : form , 'wrong_password' : True})
+                info = '密码错误！'
             else:
                 customer = Customer.objects.get(email = email)
                 request.session['uid'] = customer.customer_id
                 request.session['user'] = email
-                print "login successfully"
+                info = '登录成功'
     form = LoginForm()
-    return render(request, 'login.html', {'form' : form})
+    return render(request, 'login.html', {'form' : form, 'info' : info})
 
 def logout(request):
     del request.session['user']
