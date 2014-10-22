@@ -1,3 +1,4 @@
+#coding=utf-8
 from django.db import models
 from django.forms import ModelForm
 from django import forms
@@ -21,6 +22,15 @@ class Customer(models.Model):
         return Customer.objects.filter(email = e, password = p)
 
 class CustomerRegisterForm(ModelForm):
+    email = forms.EmailField(widget = forms.TextInput(attrs = {'class': 'form-control'}), label = 'Email')
+    password = forms.CharField(widget = forms.TextInput(attrs = {'class': 'form-control'}), label = '密码')
+    phone = forms.CharField(widget = forms.TextInput(attrs = {'class': 'form-control'}), label = '手机号码')
     class Meta:
         model = Customer
-        fields = ('email', 'phone', 'password')
+        fields = ('email', 'password', 'phone')
+
+class Token(models.Model):
+    token = models.CharField(max_length = 32)
+    customer = models.ForeignKey(Customer)
+    status = models.IntegerField(default = 0)
+

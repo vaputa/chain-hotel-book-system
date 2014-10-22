@@ -1,7 +1,7 @@
 from django.conf.urls import include, url
 from django.contrib import admin
 
-from common.customer.views import customer_register, customer_edit, login, logout
+from common.customer.views import login, logout
 
 urlpatterns = [
     url('^$', 'common.views.homepage'),
@@ -18,7 +18,8 @@ urlpatterns = [
     url('^order/list/$', 'common.order.views.list'),
     url('^order/cancel/(?P<id>\d{0,6})/$', 'common.order.views.cancel'),
     url('^order/new_order/(?P<id>\d{0,6})/(?P<begin>(\d|-){0,12})/(?P<end>(\d|-){0,12})/$', 'common.order.views.new'),
-    url('^customer/register/$', customer_register),
-    url('^customer/edit/$', customer_edit)
+    url('^customer/register/$', 'common.customer.views.register'),
+    url('^customer/edit/$', 'common.customer.views.edit'),
+    url('^account/(?P<token>[\d\w]{32})/$', 'common.customer.views.account_service')
 #    url(r'^admin/', include(admin.site.urls)),
 ]

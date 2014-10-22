@@ -37,7 +37,7 @@ def send_mail(to_list,sub,content):
 		print str(e)
 		return False
 
-def generateToken():
+def generate_token():
 	#以下为md5的url生成部分，通过当前时间戳和一个随机数确定一个字符串，对其进行md5处理
 	d=time.time()
 	t=random.random()

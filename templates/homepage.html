@@ -23,7 +23,7 @@
                     <li><a href="/">首页</a></li>
                     <li><a href="#">显示房间</a></li>
                     <li><a href="#">添加房间</a></li>
-                    <li><a href="{% url 'common.customer.views.customer_register' %}">注册</a></li>
+                    <li><a href="{% url 'common.customer.views.register' %}">注册</a></li>
                     <li><a href="{% url 'common.customer.views.login' %}">登录</a></li>
                     <li><a href="#">关于</a></li>
                 </ul>
@@ -62,15 +62,15 @@
                     <h2 class="post-title">
                         <a href="#">页面内容放置处</a>
                     </h2>
-                    <form action='/room/search/' method='POST'>
+                    <form action='{% url 'common.room.views.search'%}' method='POST'>
                         {% csrf_token %}    
                         <table class='table'>
                         {{ form }}
                         <tr>
                             <td>
                             </td>
-                            <td colspan='1' offset='1'>
-                                <input type='submit' class='btn btn-primary' value='search'/>
+                            <td colspan='1'>
+                                <input type='submit' class='btn btn-primary btn-lg' value='查找'/>
                             </td>
                         </tr>
                         </table>
