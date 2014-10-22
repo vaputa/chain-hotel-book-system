@@ -13,19 +13,24 @@ from common.models import LoginForm
 from common.hotel.models import HotelEntity, HotelEntityForm
 
 def register(request):
+    info = ''
     if request.method == 'POST':
         form = CustomerRegisterForm(request.POST)
         if form.is_valid():
-            customer = form.save()
-            customer.save()
-            token = Token(token = utility.generate_token(), customer = customer)
-            token.save()
-            content = '''<!DOCTYPE HTML><html><head><meta charset="utf-8"><title>Guo Hao Hotel注册验证</title></head><body><a href='localhost:8000/account/%s/'>激活</a></body></html>'''
-            utility.send_mail(customer.email, 'GuoHaoHotel', content % token.token)
-            return render(request, 'info.html', {'info': '已经发送一封邮件至%s，请点击连接激活账户' % customer.email})
-
-    form = CustomerRegisterForm()
-    return render(request, 'register.html', {'form' : form})
+            email = form.cleaned_data['email']
+            if Customer.objects.filter(email= email).count() == 0:
+                customer = form.save()
+                customer.save()
+                token = Token(token = utility.generate_token(), customer = customer)
+                token.save()
+                content = '''<!DOCTYPE HTML><html><head><meta charset="utf-8"><title>Guo Hao Hotel注册验证</title></head><body><a href='localhost:8000/account/%s/'>激活</a></body></html>'''
+                utility.send_mail(customer.email, 'GuoHaoHotel', content % token.token)
+                info = '已经发送一封邮件至%s，请点击链接激活账户' % customer.email
+            else:
+                info = '邮箱已经注册！'
+    elif request.method == 'GET':
+        form = CustomerRegisterForm()
+    return render(request, 'register.html', {'form' : form, 'info' : info})
 
 def login(request):
     print "current user: " + str(request.session.get('user', None))
