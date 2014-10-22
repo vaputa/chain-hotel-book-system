@@ -44,7 +44,7 @@ def search(request):
             t = form.cleaned_data['order_end']
             rooms = Room.objects.extra(select = {'is_free' : 
                 "SELECT COUNT(*) FROM orderdetail_orderdetail \
-                WHERE status = 0 and room_id = room_room.room_id AND '" + 
+                WHERE status >= 0 and room_id = room_room.room_id AND '" + 
                 str(s) + "' <= order_date AND order_date < '" + str(t) + "'"})
 
             buf = {}

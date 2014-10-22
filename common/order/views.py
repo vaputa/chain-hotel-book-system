@@ -14,7 +14,9 @@ from common.room.models import Room
 from models import Order
 
 def new(request, id, begin, end):
-    customer = Customer.objects.get(customer_id = 1) #TODO
+    if request.session.get('uid', None) == None:
+        return HttpResponseRedirect('/')
+    customer = Customer.objects.get(customer_id = request.session['uid'])
     room = Room.objects.get(room_id = id)
     s = datetime.date(*(time.strptime(begin, '%Y-%m-%d')[0:3]))
     t = datetime.date(*(time.strptime(end, '%Y-%m-%d')[0:3]))
@@ -27,17 +29,34 @@ def new(request, id, begin, end):
         s = s + datetime.timedelta(1)
     return render(request, 'room.html', {})
 
+def pay(request, id):
+    if request.session.get('uid', None) == None:
+        return HttpResponseRedirect('/')
+    order = Order.objects.get(order_id = id)
+    order.status = 1
+    order.save()
+    return HttpResponseRedirect('/order/list')
+
+
+def get(request, id):
+    if request.session.get('uid', None) == None:
+        return HttpResponseRedirect('/')
+    order = Order.objects.get(order_id = id)
+
+    return HttpResponseRedirect('/order/list')
+
+
 def list(request):
     if request.session.get('uid', None) == None:
         return HttpResponseRedirect('/')
     uid = request.session['uid']
-    orders = Order.objects.filter(customer_id = uid, status = 1)
+    orders = Order.objects.filter(customer_id = uid)
     return render(request, 'order_list_customer.html', {'orders': orders})
 
 def cancel(request, id):
     order = Order.objects.get(order_id = id) 
     orderdetails = OrderDetail.objects.filter(order_id = id)
-    orderdetails.update(status = 1)
-    order.status = 1
+    orderdetails.update(status = -1)
+    order.status = -1
     order.save()
     return HttpResponseRedirect('/order/list')

@@ -16,6 +16,8 @@ urlpatterns = [
     url('^room/search/$', 'common.room.views.search'),
     url('^room/list/$', 'common.room.views.list'),
     url('^order/list/$', 'common.order.views.list'),
+    url('^order/pay/(?P<id>\d{0,6})$', 'common.order.views.pay'),
+    url('^order/get/(?P<id>\d{0,6})/$', 'common.order.views.get'),
     url('^order/cancel/(?P<id>\d{0,6})/$', 'common.order.views.cancel'),
     url('^order/new_order/(?P<id>\d{0,6})/(?P<begin>(\d|-){0,12})/(?P<end>(\d|-){0,12})/$', 'common.order.views.new'),
     url('^customer/register/$', 'common.customer.views.register'),
