@@ -22,6 +22,7 @@ urlpatterns = [
     url('^order/new_order/(?P<id>\d{0,6})/(?P<begin>(\d|-){0,12})/(?P<end>(\d|-){0,12})/$', 'common.order.views.new'),
     url('^customer/register/$', 'common.customer.views.register'),
     url('^customer/edit/$', 'common.customer.views.edit'),
+    url('^customer/profile/$', 'common.customer.views.profile'),
     url('^account/(?P<token>[\d\w]{32})/$', 'common.customer.views.account_service')
 #    url(r'^admin/', include(admin.site.urls)),
 ]

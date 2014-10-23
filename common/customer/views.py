@@ -77,3 +77,9 @@ def account_service(request, token):
     token_object.status = 1
     token_object.save()
     return render(request, 'info.html', {'info' : "验证成功"})
+
+def profile(request):
+    if request.session.get('user', None) == None:
+        return HttpResponseRedirect('/')
+    customer = Customer.objects.get(email = request.session['user'])
+    return render(request, 'profile.html', {'customer' : customer})

@@ -1,12 +1,12 @@
+import datetime
+import time
+
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.template import Context,Template 
 from django.template.loader import get_template  
-
-import datetime
-import time
 
 from common.orderdetail.models import OrderDetail
 from common.customer.models import Customer
@@ -20,8 +20,8 @@ def new(request, id, begin, end):
     room = Room.objects.get(room_id = id)
     s = datetime.date(*(time.strptime(begin, '%Y-%m-%d')[0:3]))
     t = datetime.date(*(time.strptime(end, '%Y-%m-%d')[0:3]))
-
     order = Order(room = room, customer = customer, check_in = s, check_out = t, price = 0)
+    order.price = (t - s).days * room.basic_price
     order.save()
     while s != t:
         od = OrderDetail(room = room, order = order, order_date = s)
@@ -33,8 +33,12 @@ def pay(request, id):
     if request.session.get('uid', None) == None:
         return HttpResponseRedirect('/')
     order = Order.objects.get(order_id = id)
-    order.status = 1
-    order.save()
+    if order.status == 0:
+        order.status = 1
+        order.save()
+        customer = Customer.objects.get(customer_id = request.session['uid'])
+        customer.credit += order.price
+        customer.save()
     return HttpResponseRedirect('/order/list')
 
 
@@ -42,7 +46,6 @@ def get(request, id):
     if request.session.get('uid', None) == None:
         return HttpResponseRedirect('/')
     order = Order.objects.get(order_id = id)
-
     return HttpResponseRedirect('/order/list')
 
 
