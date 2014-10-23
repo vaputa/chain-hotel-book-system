@@ -16,7 +16,8 @@
         <div class="collapse navbar-collapse" id="global-navbar">
             <ul class="nav navbar-nav">
                 <li><a href="/">首页</a></li>
-                <li><a href="{% url 'common.hotel.views.list' %}">显示酒店</a></li>
+                <li><a href="{% url 'common.hotel.views.list' %}">酒店</a></li>
+                <li><a href="{% url 'common.order.views.list' %}">订单</a></li>
                 <li><a href="#">添加房间</a></li>
                 <li><a href="{% url 'common.customer.views.register' %}">注册</a></li>
                 <li><a href="{% url 'common.customer.views.login' %}">登录</a></li>

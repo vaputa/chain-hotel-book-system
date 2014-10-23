@@ -1,11 +1,66 @@
 <html>
-<body>
-<form action="{{ action }}" method="POST">
-{% csrf_token %}    
-<table>
-    {{ form }}
-    <tr> <td> <input type="submit" value="提交"/></td>  </tr>
-</table>    
-</form>
+{% include "head.html" %}
+
+<body class="home-template custom-bg" style="background-image: url(/static/assets/pic/hotel6.jpg)">
+
+{% include "navbar.html" %}
+
+<header id="logo" class="container">
+    <div class="row">
+        <div class="col-lg-8 col-lg-push-2">
+            <h1 class="blog-title">
+                <a href="#">God Hao Hotel</a>
+            </h1>
+            <h2 class="blog-desc">
+                <a href="#">The God Hao Hotel  allows you to share your story with the world.</a>
+            </h2>
+            <div class="social">
+                <a href="http://weibo.com/u/2315359802" class="btn btn-outline btn-lg" title="官方微博" target="_blank"><i class="fa fa-weibo"></i> 官方微博</a>
+                <a class="btn btn-outline btn-lg" href="#" title="联系我们" target="_blank"><i class="fa fa-comments"></i> 联系我们</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main class="container" role="main">
+    <div class="row">
+        <div class="col-sm-8 col-sm-push-1">
+
+            <article class="panel post tag-ghost-post tag-xin-ban-ben-fa-bu" data-scroll-reveal="enter bottom"> 
+                <header class="panel-heading post-header">
+                    <form action="{{ action }}" method="POST">
+                    {% csrf_token %}    
+                    <table class='table table-striped'>
+                        {{ form }}
+                        <tr> <td> <input type="submit" value="提交"/></td>  </tr>
+
+                    </table>  
+                    </form>
+                </header>
+                
+            </article>
+
+
+        </div>
+        <div class="col-sm-2 col-sm-push-1">
+            <div class="list-group tag-sidebar">
+                <a href="#" class="list-group-item"><i class="fa fa-tag"></i> 可选菜单1</a>
+                <a href="#" class="list-group-item"><i class="fa fa-tag"></i> 可选菜单2</a>
+                <a href="#" class="list-group-item"><i class="fa fa-tag"></i> 可选3</a>
+                <a href="#" class="list-group-item"><i class="fa fa-tag"></i> 可选4</a>
+                <a href="#" class="list-group-item"><i class="fa fa-tag"></i> 可选5</a>
+
+            </div>
+            <div class="list-group ad-sidebar">
+                <a href="#" target="_blank" class="list-group-item text-hide">测试菜单1</a>
+            </div>        
+        </div>
+    </div>
+
+
+</main>
+
+    {% include "footer.html" %}
+
 </body>
 </html>
