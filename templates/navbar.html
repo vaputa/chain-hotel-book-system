@@ -17,8 +17,12 @@
             <ul class="nav navbar-nav">
                 <li><a href="/">首页</a></li>
                 <li><a href="{% url 'common.hotel.views.list' %}">酒店</a></li>
+                {% if request.session.user %}
                 <li><a href="{% url 'common.order.views.list' %}">订单</a></li>
+                {% endif %}
+                {% if request.session.is_admin %}
                 <li><a href="{%url 'common.room.views.add' %}">添加房间</a></li>
+                {% endif %}
                 <li><a href="#">关于</a></li>
             </ul>
             <p class="navbar-text qq">  {% if request.session.user %}<a href='/customer/profile'> {{request.session.user }}</a> / <a href="/logout">注销</a>

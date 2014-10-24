@@ -39,12 +39,22 @@ def login(request):
         if form.is_valid():
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
-            if not Customer.contain_email(email):
+            
+            if email == 'admin@hotel.com':
+                if password == 'password':
+                    request.session['is_admin'] = True
+                    request.session['uid'] = '-1'
+                    request.session['user'] = 'HotelAdmin'
+                    info = '登陆成功'
+                else :
+                    info = '密码错误！'
+            elif not Customer.contain_email(email):
                 info = 'EMAIL不存在！'
             elif not Customer.is_auth(email, password):
                 info = '密码错误！'
             else:
                 customer = Customer.objects.get(email = email)
+                request.session['is_admin'] = False
                 request.session['uid'] = customer.customer_id
                 request.session['user'] = email
                 info = '登录成功'
@@ -54,6 +64,7 @@ def login(request):
 def logout(request):
     del request.session['user']
     del request.session['uid']
+    del request.session['is_admin']
     return HttpResponseRedirect("/")
 
 def edit(request):

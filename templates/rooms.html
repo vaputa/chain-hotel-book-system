@@ -29,11 +29,20 @@
             <article class="panel post tag-ghost-post tag-xin-ban-ben-fa-bu" data-scroll-reveal="enter bottom"> 
                 <header class="panel-heading post-header">
                     <table class='table table-striped'>
+                        <tr>
+                            <td>酒店ID</td>
+                            <td>酒店名称</td>
+                            <td>酒店房间</td>
+                            <td>酒店单价</td>
+                            <td>房间类型</td>
+                            <td>操作</td>
+                        </tr>
                         {% for e in rooms %}
                         <tr>
                             <td>{{e.hotel_id}}</td>
                             <td>{{e.hotel}}</td>
                             <td>{{e.room_number}}</td>
+                            <td>{{e.basic_price}}</td>
                             <td>{{e.room_type}}</td>
                                 <td><a href="{% url 'common.room.views.edit' e.room_id %}"> 修改 </a></td>
                             <tr>

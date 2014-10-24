@@ -35,7 +35,9 @@
                             <td>地址</td>
                             <td>电话</td>
                             <td>坐标</td>
+                            {% if request.session.is_admin%}
                             <td>操作</td>
+                            {% endif %}
                         </tr>
                         {% for e in hotels %}
                         <tr>
@@ -44,7 +46,9 @@
                             <td>{{e.address}}</td>
                             <td>{{e.tel}}</td>
                             <td>{{e.location}}</td>
-                            <td><a href='{% url 'common.hotel.views.edit' e.hotel_id %}'>Edit</a> <a href='{% url 'common.hotel.views.room_list' e.hotel_id %}'>Rooms</a></td>
+                            {% if request.session.is_admin %}
+                            <td><a href='{% url 'common.hotel.views.edit' e.hotel_id %}'>编辑</a> / <a href='{% url 'common.hotel.views.room_list' e.hotel_id %}'>查看房间</a></td>
+                            {% endif %}
                         <tr>
                         {% endfor %}
                     </table>
