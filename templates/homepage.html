@@ -22,7 +22,8 @@
     </div>
 </header>
 
-<main class="container" role="main">
+<main class="container" name role="main">
+    <a id="content"> </a>
     <div class="row">
         <div class="col-sm-8 col-sm-push-1">
 
@@ -31,7 +32,7 @@
                     <h2 class="post-title">
                         <a href="#">页面内容放置处</a>
                     </h2>
-                    <form action='{% url 'common.room.views.search'%}' method='POST'>
+                    <form action='{% url 'common.room.views.search'%}#content' method='POST'>
                         {% csrf_token %}    
                         <table class='table'>
                         {{ form }}
@@ -51,6 +52,7 @@
                             <td>{{ room.room_id }}</td>
                             <td>{{ room.hotel }}</td>
                             <td>{{ room.room_type }}</td>
+                            <td>{{ room.basic_price }}</td>
                             <td><a href="{% url 'common.order.views.new' room.room_id begin end%}"> 预定 </a></td>
                         </tr>
                         {% endfor %}

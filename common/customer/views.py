@@ -68,6 +68,7 @@ def logout(request):
     return HttpResponseRedirect("/")
 
 def edit(request):
+    info = ''
     if request.session.get('user', None) == None:
         return HttpResponseRedirect('/')
     customer = Customer.objects.get(email = request.session['user'])
@@ -76,9 +77,10 @@ def edit(request):
         if form.is_valid():
             customer = form.save()
             customer.save()
+            info = '更新成功！'
     else:
         form = CustomerRegisterForm(instance = customer)
-    return render(request, 'customer_edit.html', {'form' : form})
+    return render(request, 'customer_edit.html', {'form' : form, 'info' : info})
 
 def account_service(request, token):
     token_object = get_object_or_404(Token, token = token)

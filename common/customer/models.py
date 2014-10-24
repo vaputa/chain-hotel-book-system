@@ -9,7 +9,8 @@ class Customer(models.Model):
     customer_id = models.AutoField(primary_key = True)
     credit = models.IntegerField(default = 0)
     email = models.EmailField()
-    phone = models.CharField(max_length = 20)
+    name = models.CharField(max_length = 10, default=None)
+    phone = models.CharField(max_length = 15)
     password = models.CharField(max_length = 20)
     status = models.IntegerField(default = 0)
 
@@ -22,12 +23,13 @@ class Customer(models.Model):
         return Customer.objects.filter(email = e, password = p)
 
 class CustomerRegisterForm(ModelForm):
+    name = forms.CharField(widget = forms.TextInput(attrs = {'class': 'form-control'}), label = '姓名')
     email = forms.EmailField(widget = forms.TextInput(attrs = {'class': 'form-control'}), label = 'Email')
     password = forms.CharField(widget = forms.TextInput(attrs = {'class': 'form-control'}), label = '密码')
     phone = forms.CharField(widget = forms.TextInput(attrs = {'class': 'form-control'}), label = '手机号码')
     class Meta:
         model = Customer
-        fields = ('email', 'password', 'phone')
+        fields = ('name', 'email', 'password', 'phone')
 
 class Token(models.Model):
     token = models.CharField(max_length = 32)

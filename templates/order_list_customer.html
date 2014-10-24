@@ -40,9 +40,11 @@
                             <td>{{order.order_id}}</td>
                             <td>{{order.room.hotel}}</td>
                             <td>{{order.get_status_display}}</td>
-                            <td> <a href='{% url 'common.order.views.get' order.order_id %}' > 查看订单 </a> 
-                                <a href='{% url 'common.order.views.pay' order.order_id %}' > 支付订单 </a> 
-                                <a href='{% url 'common.order.views.cancel' order.order_id %}' > 取消订单 </a> 
+                            <td> {% if order.status == 0 %}
+                                <a href='{% url 'common.order.views.pay' order.order_id %}' > 支付订单 </a>
+                                {% elif order.status == 1 %} 
+                                <a href='{% url 'common.order.views.cancel' order.order_id %}' > 取消订单 </a>
+                                {% endif %} 
                                 <a href='{% url 'common.order.views.get' order.order_id %}' > 查看订单 </a>
                                 </td>  
                         </tr>

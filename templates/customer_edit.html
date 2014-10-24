@@ -31,7 +31,9 @@
                     <form action="{% url 'common.customer.views.edit' %}" method="POST">
                     {% csrf_token %}    
                     <table class='table table-striped'>
-                        {{ form }}
+                        {% if info %}
+                        <tr><td colspan=2 class='text-danger'>{{ info }}</td></tr>
+                        {% endif %}                         {{ form }}
                         <tr> <td></td><td colspan=2> <input class='btn btn-primary' type="submit" value="更新"/></td>  </tr>
                     </table>    
                     </form>
