@@ -30,7 +30,7 @@
             <article class="panel post tag-ghost-post tag-xin-ban-ben-fa-bu" data-scroll-reveal="enter bottom"> 
                 <header class="panel-heading post-header">
                     <h2 class="post-title">
-                        <a href="#">页面内容放置处</a>
+                        <a href="#">房间查询</a>
                     </h2>
                     <form action='{% url 'common.room.views.search'%}#content' method='POST'>
                         {% csrf_token %}    
@@ -58,7 +58,7 @@
                         {% endfor %}
                     </table> 
                 </header>
-                
+                <!--
                 <section class="panel-footer post-meta">
                     <div class="post-tags">
                             <i class="fa fa-tags"></i>
@@ -66,8 +66,9 @@
                             <p>写点文字内容或者放置表单</p>
                     </div>                   
                 </section>
+                -->
             </article>
-
+            <!---
             <article class="panel post tag-ghost-post tag-xin-ban-ben-fa-bu" data-scroll-reveal="enter bottom"> 
                 <header class="panel-heading post-header">
                     <h2 class="post-title">
@@ -82,7 +83,7 @@
                     </div>
                 </section>
             </article>
-
+            -->
         </div>
         <div class="col-sm-2 col-sm-push-1">
             <div class="list-group tag-sidebar">
