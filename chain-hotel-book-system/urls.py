@@ -23,6 +23,10 @@ urlpatterns = [
     url('^customer/register/$', 'common.customer.views.register'),
     url('^customer/edit/$', 'common.customer.views.edit'),
     url('^customer/profile/$', 'common.customer.views.profile'),
-    url('^account/(?P<token>[\d\w]{32})/$', 'common.customer.views.account_service')
+    url('^account/(?P<token>[\d\w]{32})/$', 'common.customer.views.account_service'),
+    url('^comment/list/(?P<hotel_id>\d{0,6})/$', 'common.comment.views.list'),
+    url('^comment/add/(?P<hotel_id>\d{0,6})/$', 'common.comment.views.add'),
+    url('^api/json/order/(?P<uid>\d{0,6})/$', 'common.order.views.order_api'),
+    url('^api/json/auth/', 'common.customer.views.login_api')
 #    url(r'^admin/', include(admin.site.urls)),
 ]

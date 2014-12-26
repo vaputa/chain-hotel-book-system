@@ -1,0 +1,64 @@
+<html>
+{% include "head.html" %}
+
+<body class="home-template custom-bg" style="background-image: url(/static/assets/pic/hotel6.jpg)">
+
+{% include "navbar.html" %}
+
+<main class="container" role="main">
+    <div class="row">
+        <div class="col-sm-8 col-sm-push-1">
+            <article class="panel post tag-ghost-post tag-xin-ban-ben-fa-bu" data-scroll-reveal="enter bottom"> 
+                <header class="panel-heading post-header">
+                    <table class='table table-striped'>
+                        <tr>
+                            <td>酒店地址</td>
+                            <td>时间</td>
+                            <td>内容</td>
+                        </tr>
+                        {% for c in comments %}
+                        <tr>
+                            <td>{{c.hotel}}</td>
+                            <td>{{c.comment_time | date:"Y-m-d H:i:s"}}</td>
+                            <td>{{c.content}}</td>
+                        <tr>
+                        {% endfor %}
+                    </table>
+                </header>                
+            </article>
+
+            <article class="panel post tag-ghost-post tag-xin-ban-ben-fa-bu" data-scroll-reveal="enter bottom"> 
+                <header class="panel-heading post-header">
+                    <form action="{% url 'common.comment.views.add' hotel.hotel_id%}" method="POST">
+                        {% csrf_token %}    
+                        <textarea class="form-control" name="comment" placeholder="评论"></textarea>
+                        <input type="submit" class="btn btn-primary" value="提交" />
+                    </form>
+                </header>
+                
+            </article>
+
+
+        </div>
+        <div class="col-sm-2 col-sm-push-1">
+            <div class="list-group tag-sidebar">
+                <a href="#" class="list-group-item"><i class="fa fa-tag"></i> 可选菜单1</a>
+                <a href="#" class="list-group-item"><i class="fa fa-tag"></i> 可选菜单2</a>
+                <a href="#" class="list-group-item"><i class="fa fa-tag"></i> 可选3</a>
+                <a href="#" class="list-group-item"><i class="fa fa-tag"></i> 可选4</a>
+                <a href="#" class="list-group-item"><i class="fa fa-tag"></i> 可选5</a>
+
+            </div>
+            <div class="list-group ad-sidebar">
+                <a href="#" target="_blank" class="list-group-item text-hide">测试菜单1</a>
+            </div>        
+        </div>
+    </div>
+
+
+</main>
+
+    {% include "footer.html" %}
+
+</body>
+</html>

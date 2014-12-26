@@ -63,3 +63,9 @@ def cancel(request, id):
     order.status = -1
     order.save()
     return HttpResponseRedirect('/order/list')
+
+def order_api(request, uid):
+    orders = Order.objects.filter(customer_id = uid)
+
+    return render(request, 'orders.json', {'orders': orders})
+    

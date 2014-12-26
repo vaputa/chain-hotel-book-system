@@ -47,7 +47,8 @@ INSTALLED_APPS = (
     'common.room',
     'common.customer',
     'common.order',
-    'common.orderdetail'
+    'common.orderdetail',
+    'common.comment'
 )
 
 MIDDLEWARE_CLASSES = (

@@ -14,6 +14,9 @@ class Customer(models.Model):
     password = models.CharField(max_length = 20)
     status = models.IntegerField(default = 0)
 
+    def __str__(self):
+        return '{"customer_id" : %d, "credit" : %d}' % (self.customer_id, self.credit)
+        
     @staticmethod
     def contain_email(e):
         return Customer.objects.filter(email = e)

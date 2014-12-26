@@ -1,0 +1,9 @@
+[ {% for order in orders %}
+        {
+        "check_in": "{{order.check_in}}", 
+        "check_out": "{{order.check_out}}", 
+        "status": "{{order.status}}", 
+        "hotel": "{{order.room.hotel}}",
+        "room_type": "{{order.room.room_type}}"
+        }, {% endfor %}
+]

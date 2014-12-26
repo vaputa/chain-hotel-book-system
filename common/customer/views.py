@@ -96,3 +96,20 @@ def profile(request):
         return HttpResponseRedirect('/')
     customer = Customer.objects.get(email = request.session['user'])
     return render(request, 'profile.html', {'customer' : customer})
+
+def login_api(request):
+    info = ''
+    status_code = -1
+    customer = None
+    if request.method == "GET":
+        form = request.GET
+        email = form['email']
+        password = form['password']            
+        if not Customer.contain_email(email):
+            status_code = 1
+        elif not Customer.is_auth(email, password):
+            status_code = 2
+        else:
+            customer = Customer.objects.get(email = email)
+            status_code = 0
+    return render(request, 'auth.json', {'status_code' : status_code, 'customer' : customer})
