@@ -90,64 +90,34 @@
 
             <article class="panel post tag-ghost-post tag-xin-ban-ben-fa-bu" data-scroll-reveal="enter bottom"> 
                 <header class="panel-heading post-header">
-                    <h2 class="post-title">
-                        <a href="#">房间查询</a>
-                    </h2>
-                </header>
-               
-                <section class="panel-footer post-meta">
-                    <div class="post-tags">
-                        <form action='{% url 'common.room.views.search'%}#content' method='POST'>
-                            {% csrf_token %}    
-                            <table class='table'>
-                            {{ form }}
-                            <tr>
-                                <td>
-                                </td>
-                                <td colspan='1'>
-                                    <input type='submit' class='btn btn-primary' value='查找'/>
-                                </td>
-                            </tr>
-                            </table>
-                        </form>
-                        <table class="table">
-                            {% if rooms %}
-                            <tr>                            
-                                <th>房间编号</th>
-                                <th>酒店名称</th>
-                                <th>房间类型</th>
-                                <th>基本价格</th>
-                            </tr>
-                            {% endif %}
-                            {% for room in rooms %}
-                            <tr>
-                                <td>{{ room.hotel }}</td>
-                                <td>{{ room.room_type }}</td>
-                                <td>{{ room.basic_price }}</td>
-                                <td><a href="{% url 'common.order.views.new' room.room_id begin end%}"> 预定 </a></td>
-                            </tr>
-                            {% endfor %}
-                        </table>
-                    </div>                   
-                </section>
-               
+                    <table class='table'>
+                        <tr>
+                            <td>订单编号</td>
+                            <td>{{order.order_id}}</td>
+                        </tr>
+                        <tr>
+                            <td>酒店名称</td>
+                            <td>{{order.room.hotel}}</td>
+                        </tr>
+                        <tr>
+                            <td>生成时间</td>
+                            <td>{{order.order_time}}</td>
+                        </tr>
+                        <tr>
+                            <td>订单价格</td>
+                            <td>{{order.price}}</td>
+                        </tr>
+                        <tr>
+                            <td>入住日期</td>
+                            <td>{{order.check_in}}</td>
+                        </tr>
+                        <tr>
+                            <td>离店日期</td>
+                            <td>{{order.check_out}}</td>
+                        </tr>
+                    </table>  
+                </header>          
             </article>
-            <!---
-            <article class="panel post tag-ghost-post tag-xin-ban-ben-fa-bu" data-scroll-reveal="enter bottom"> 
-                <header class="panel-heading post-header">
-                    <h2 class="post-title">
-                        <a href="#">Form2表单2放置处</a>
-                    </h2>
-                </header>
-                
-                <section class="panel-footer post-meta">
-                    <div class="post-tags">
-                            <i class="fa fa-tags"></i>
-                            <a href="#">Hao</a>
-                    </div>
-                </section>
-            </article>
-            -->
         </div>
         <div class="col-sm-2 col-sm-push-1">
             <div class="list-group tag-sidebar">

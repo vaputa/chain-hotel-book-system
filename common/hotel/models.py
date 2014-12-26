@@ -1,3 +1,4 @@
+#-*-coding:utf-8-*- 
 from django.db import models
 from django.forms import ModelForm
 from django import forms
@@ -14,6 +15,10 @@ class HotelEntity(models.Model):
 
 class HotelEntityForm(ModelForm):
     #hotel_id = forms.IntegerField(widget = forms.HiddenInput)
+    name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'type': 'text'}), label='名称')
+    address = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'type': 'text'}), label='地址')
+    tel = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'type': 'text'}), label='电话')
+    location = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'type': 'text'}), label='坐标')
     class Meta:
         model = HotelEntity
         fields = '__all__'

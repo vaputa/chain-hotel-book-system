@@ -4,7 +4,7 @@ from django import forms
 import datetime
 
 class LoginForm(forms.Form):
-    email = forms.EmailField(widget=forms.TextInput(attrs={'class': 'form-control', 'type': 'text'}), label='EMAIL')
+    email = forms.EmailField(widget=forms.TextInput(attrs={'class': 'form-control', 'type': 'text'}), label='email')
     password = forms.CharField(max_length = 20, widget=forms.TextInput(attrs={'class': 'form-control', 'type': 'password'}), label = '密码')
 
 class SearchForm(forms.Form):

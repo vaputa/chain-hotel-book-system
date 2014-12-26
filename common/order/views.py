@@ -27,7 +27,7 @@ def new(request, id, begin, end):
         od = OrderDetail(room = room, order = order, order_date = s)
         od.save()
         s = s + datetime.timedelta(1)
-    return render(request, 'room.html', {})
+    return HttpResponseRedirect('/order/list')
 
 def pay(request, id):
     if request.session.get('uid', None) == None:
@@ -46,7 +46,7 @@ def get(request, id):
     if request.session.get('uid', None) == None:
         return HttpResponseRedirect('/')
     order = Order.objects.get(order_id = id)
-    return HttpResponseRedirect('/order/list')
+    return render(request, 'order_detail.html', {'order': order})
 
 
 def list(request):

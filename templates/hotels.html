@@ -24,31 +24,32 @@
 
 <main class="container" role="main">
     <div class="row">
-        <div class="col-sm-8 col-sm-push-1">
+        <div class="col-sm-10 col-sm-push-1">
 
             <article class="panel post tag-ghost-post tag-xin-ban-ben-fa-bu" data-scroll-reveal="enter bottom"> 
                 <header class="panel-heading post-header">
-                    <table class="table table-striped">
+                    <table class="table table-striped" style="font-size:15px">
                         <tr>
-                            <td>ID</td>
                             <td>名称</td>
                             <td>地址</td>
                             <td>电话</td>
                             <td>坐标</td>
-                            {% if request.session.is_admin%}
                             <td>操作</td>
+                            {% if request.session.is_admin%}
+                            <td>管理</td>
                             {% endif %}
                         </tr>
                         {% for e in hotels %}
                         <tr>
-                            <td>{{e.hotel_id}}</td>
                             <td>{{e.name}}</td>
                             <td>{{e.address}}</td>
                             <td>{{e.tel}}</td>
                             <td>{{e.location}}</td>
+                            <td><a href='{% url 'common.comment.views.list' e.hotel_id%}'>查看评论</a></td>
                             {% if request.session.is_admin %}
                             <td><a href='{% url 'common.hotel.views.edit' e.hotel_id %}'>编辑</a> / <a href='{% url 'common.hotel.views.room_list' e.hotel_id %}'>查看房间</a></td>
                             {% endif %}
+
                         <tr>
                         {% endfor %}
                     </table>
@@ -71,19 +72,6 @@
                 </section>
             </article>
 
-        </div>
-        <div class="col-sm-2 col-sm-push-1">
-            <div class="list-group tag-sidebar">
-                <a href="#" class="list-group-item"><i class="fa fa-tag"></i> 可选菜单1</a>
-                <a href="#" class="list-group-item"><i class="fa fa-tag"></i> 可选菜单2</a>
-                <a href="#" class="list-group-item"><i class="fa fa-tag"></i> 可选3</a>
-                <a href="#" class="list-group-item"><i class="fa fa-tag"></i> 可选4</a>
-                <a href="#" class="list-group-item"><i class="fa fa-tag"></i> 可选5</a>
-
-            </div>
-            <div class="list-group ad-sidebar">
-                <a href="#" target="_blank" class="list-group-item text-hide">测试菜单1</a>
-            </div>        
         </div>
     </div>
 

@@ -1,3 +1,4 @@
+#encoding=utf8
 from django.db import models
 from django.forms import ModelForm
 from django import forms
@@ -14,6 +15,11 @@ class Room(models.Model):
 
 
 class RoomForm(ModelForm):
+    hotel = forms.ModelChoiceField(queryset=HotelEntity.objects,widget=forms.Select(attrs={'class': 'form-control', 'type': 'text'}),label='酒店名称')
+    room_type =  forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'type': 'text'}), label='房间类型')
+    room_number =  forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'type': 'text'}), label='房间号')
+    max_capacity =  forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'type': 'text'}), label='人数')
+    basic_price =  forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'type': 'text'}), label='价格')
     class Meta:
         model = Room
         fields = '__all__'

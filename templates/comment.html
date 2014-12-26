@@ -12,13 +12,13 @@
                 <header class="panel-heading post-header">
                     <table class='table table-striped'>
                         <tr>
-                            <td>酒店地址</td>
+                            <td>用户</td>
                             <td>时间</td>
                             <td>内容</td>
                         </tr>
                         {% for c in comments %}
                         <tr>
-                            <td>{{c.hotel}}</td>
+                            <td>{{c.customer.name}}</td>
                             <td>{{c.comment_time | date:"Y-m-d H:i:s"}}</td>
                             <td>{{c.content}}</td>
                         <tr>
