@@ -58,16 +58,14 @@
         </div>
         <div class="col-sm-2 col-sm-push-1">
             <div class="list-group tag-sidebar">
-                <a href="#" class="list-group-item"><i class="fa fa-tag"></i> 可选菜单1</a>
-                <a href="#" class="list-group-item"><i class="fa fa-tag"></i> 可选菜单2</a>
-                <a href="#" class="list-group-item"><i class="fa fa-tag"></i> 可选3</a>
-                <a href="#" class="list-group-item"><i class="fa fa-tag"></i> 可选4</a>
-                <a href="#" class="list-group-item"><i class="fa fa-tag"></i> 可选5</a>
+                <a href="/" class="list-group-item"><i class="fa fa-tag"></i> 首页</a>
+                <a href="{% url 'common.hotel.views.list' %}" class="list-group-item"><i class="fa fa-tag"></i> 酒店</a>
+                <a href="{% url 'common.order.views.list' %}" class="list-group-item"><i class="fa fa-tag"></i> 订单</a>
+                <a href="{% url 'common.customer.views.login' %}" class="list-group-item"><i class="fa fa-tag"></i> 登录</a>
+                <a href="{% url 'common.customer.views.register' %}" class="list-group-item"><i class="fa fa-tag"></i> 注册</a>
 
             </div>
-            <div class="list-group ad-sidebar">
-                <a href="#" target="_blank" class="list-group-item text-hide">测试菜单1</a>
-            </div>        
+        
         </div>
     </div>
 

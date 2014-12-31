@@ -23,7 +23,7 @@ def register(request):
                 customer.save()
                 token = Token(token = utility.generate_token(), customer = customer)
                 token.save()
-                content = '''<!DOCTYPE HTML><html><head><meta charset="utf-8"><title>Guo Hao Hotel注册验证</title></head><body><a href='localhost:8000/account/%s/'>激活</a></body></html>'''
+                content = '''<!DOCTYPE HTML><html><head><meta charset="utf-8"><title>Guo Hao Hotel注册验证</title></head><body><a href='http://10.131.255.124/account/%s/'>激活</a></body></html>'''
                 utility.send_mail(customer.email, 'GuoHaoHotel', content % token.token)
                 info = '已经发送一封邮件至%s，请点击链接激活账户' % customer.email
             else:

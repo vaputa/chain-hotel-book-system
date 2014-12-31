@@ -15,7 +15,7 @@ class Customer(models.Model):
     status = models.IntegerField(default = 0)
 
     def __str__(self):
-        return '{"customer_id" : %d, "credit" : %d}' % (self.customer_id, self.credit)
+        return '{"customer_id" : "%d", "email": "%s", "credit" : "%d", "name" : "%s"}' % (self.customer_id, self.email, self.credit, self.name)
         
     @staticmethod
     def contain_email(e):

@@ -4,6 +4,9 @@
         "check_out": "{{order.check_out}}", 
         "status": "{{order.status}}", 
         "hotel": "{{order.room.hotel}}",
-        "room_type": "{{order.room.room_type}}"
+        "address" : "{{order.room.hotel.address}}",
+        "room_type": "{{order.room.room_type}}",
+        "price" : "{{order.price}}",
+        "location" : "{{order.room.hotel.location}}"
         }, {% endfor %}
 ]

@@ -1,0 +1,51 @@
+数据库增量备份及恢复
+sqlfullBak.sh     完全备份
+sqlincreBak.sh    增量备份
+
+增量策略
+是相对于上一天的增量
+ 
+周日                       (完全备份数据库) 
+  周一 新增
+	周二 新增
+		周三 新增
+			.......
+
+1.环境配置
+首先开启 mysql的日志功能
+vi /etc/mysql/my.cnf
+将 #log_bin 前面的注释取消,开启log_bin 二进制日志记录功能
+
+
+test2服务器机器需要无密码访问到 test机器(备份机器)
+先远程登录到test2上,
+执行
+ssh-keygen -t rsa
+scp /root/.ssh/id_rsa.pub root@test.everlive.me:~/.ssh/authorized_keys
+即可让test2无密码访问 test机器
+
+2.部署 sqlfullbak,sqlincreBak 
+变量BakDir是本地机器上的临时存放地,可以不用修改
+只需要修改
+
+sqlfullBak.sh
+44行: mysqldump 的连接mysql数据库的用户名密码
+47行: scp对应的备份存放机器的ip以及存放目录 (确保能ssh无密码访问到备份存放机器)
+
+sqlincreBak.sh
+44行: mysqladmin对应的mysql数据库的用户名密码
+70行: scp对应的备份存放机器的ip以及存放目录 (确保能ssh无密码访问到备份存放机器)
+
+
+
+3.加入计划任务
+crontab -e
+
+0 3 * * 0 sh /root/pyshell/sqlfullBak.sh       周日早上3点整完全备份
+0 3 * * 1-6 sh /root/pyshell/sqlincreBak.sh    周一到周六每天早上3点增量备份
+
+
+4.数据库恢复 使用命令恢复 
+mysql -uguo -pguo1234 <20140813_full.sql           先恢复完整备份
+mysql -uguo -pguo1234 <20140814_154623_inc.sql   恢复自完整备份以后的增量部分
+
